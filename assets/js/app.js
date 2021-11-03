@@ -6,6 +6,10 @@ function updateHourItems(){
     //is present if current time isBetween 9 and 9:59
     // is past if current time isAfter 9:59
     // is future is current time isBefore 9
+    var todaysDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+    var currentDayEl = document.getElementById("currentDay");
+    currentDayEl.textContent = todaysDate;
+
 for(var i=9; i<18; i++) {
     var hourEl=document.getElementById("hour-"+i);
     var workHourBegin = $("#hour-"+i);
@@ -18,24 +22,37 @@ for(var i=9; i<18; i++) {
     } if(moment().isBetween(workHourBegin,workHourEnd)){
     $(hourEl).children().addClass("present");
     }
-}
+};
     //read relevant local storage data (about relevant hour slot)    
+    var tasks ={};
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+    if (!tasks) {
+        tasks = {
+          hour9: [],
+          hour10: [],
+          hour11: [],
+          hour12: [],
+          hour13: [],
+          hour14: [],
+          hour15: [],
+          hour16: [],
+          hour17: [],
+        };
+      }
     };
     function handleSave(e){
-    cd    //console.log(e.target);
+       //console.log(e.target);      
        var hour = ($(e.target).sibling('.description').val());
-    
+       console.log(hour);
         //tree traversal getting sibling element
         console.log($(e.target).sibling('.description').val());
         var value =($(e.target).closest('.time-block').attr('id'));
     //getting closest (or parent not sibling))element attribute
         console.log($(e.target).closest('.time-block').attr('id'));
-        localStorage.setItem(hour,value65564           );
+        localStorage.setItem(hour,value);
     
     }
     function main(){
-        console.log('here');
-       
         updateHourItems();
     //add click event to timeSlots
     //document.addEventListener('click',handleSave())
