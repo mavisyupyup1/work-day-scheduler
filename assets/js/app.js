@@ -1,6 +1,6 @@
 var descriptionEl= document.querySelector(".description");
 // create array to hold tasks
-var tasks ={};
+var tasks =[];
 function updateHourItems(){
     //assign classes (past/present/future)
     // work hour 9 is 9:00-9:59:59
@@ -24,72 +24,67 @@ function updateHourItems(){
         $(hourEl).children().addClass("present");
         }
     };
-<<<<<<< HEAD
-    function handleSave(e){
-        console.log(e.target);
-       var hour = ($(e.target).sibling('.description').val());
-    
-        //tree traversal getting sibling element
-        console.log($(e.target).sibling('.description').val());
-        var value =($(e.target).closest('.time-block').attr('id'));
-    //getting closest (or parent not sibling))element attribute
-        console.log($(e.target).closest('.time-block').attr('id'));
-        localStorage.setItem(hour,value65564           );
-    
-    }
-    function main(){
-        console.log('here');
-       
-        updateHourItems();
-    //add click event to timeSlots
-    //document.addEventListener('click',handleSave())
-    $(document).on('click','.save-btn',handleSave);
-    //enable btns
-    }
-    
-    //start when domcontent loaded event -- cant deal with the DOM
-    $(main);
-=======
-    //read relevant local storage data (about relevant hour slot)    
-//     tasks = JSON.parse(localStorage.getItem("tasks"));
-//     if (!tasks) {
-//         tasks = {
-//           hour9: [],
-//           hour10: [],
-//           hour11: [],
-//           hour12: [],
-//           hour13: [],
-//           hour14: [],
-//           hour15: [],
-//           hour16: [],
-//           hour17: [],
-//         };
-//       }
-//     // loop over object properties
-//     $.each(tasks, function(list, arr) {
-//     //console.log(list, arr);
-//     // then loop over sub-array
-//     arr.forEach(function(task) {
-//     createTask(task.text, task.date, list);
-//     });
-//   });
+    $(".description").each(function(){
+        var timeId =$(this).parent('.time-block').attr('id');
+        var description = localStorage.getItem(timeId);
+        $(this).text(description);
+    });
 };
+var createTasks =function(){
+    
+}
+var loadTasks =function(){
+    //read relevant local storage data (about relevant hour slot)    
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+    if (!tasks) {
+        tasks = {
+          hour9: [],
+          hour10: [],
+          hour11: [],
+          hour12: [],
+          hour13: [],
+          hour14: [],
+          hour15: [],
+          hour16: [],
+          hour17: [],
+        };
+      }
+    // loop over object properties
+    $.each(tasks, function(list, arr) {
+    //console.log(list, arr);
+    // then loop over sub-array
+    arr.forEach(function(task) {
+    createTask(task.text, task.date, list);
+    });
+  });
+  console.log(tasks)
+};
+
+var saveTasks=function(){
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
+
 function handleSave(event){
-    console.log(event.target);      
+    console.log(event.target);     
+    //tree traversal getting sibling element 
     var value= ($(event.target).siblings('.description').val());
     console.log(value);
-    //tree traversal getting sibling element
+    var taskText =$(descriptionEl).text(value);
+    console.log( $(descriptionEl).text(value));
+console.log(taskText)
+    //getting closest (or parent not sibling))element attribute
     var hour =($(event.target).closest('.time-block').attr('id'));
     console.log(hour);
-//getting closest (or parent not sibling))element attribute
-    console.log($(event.target).closest('.time-block').attr('id'));
-    localStorage.setItem("hour",hour);
-    tasks.push({
-        text: value,
-        hour: hour
-    });
-    console.log(tasks);
+    localStorage.setItem(hour,value);
+    $(".hour").each(function(){
+        var currHour =$(this).text();
+        console.log(this);
+        var currentPlan = localStorage.getItem("hour-14");
+    })
+   
+    saveTasks();
 
+    
 }
 function main(){
     updateHourItems();
@@ -100,4 +95,3 @@ $(document).on('click','.save-btn',handleSave);
 
 //start when domcontent loaded event -- cant deal with the DOM
 $(document).ready(main);
->>>>>>> f750984508569f461584d2cdabc96faa3f7f77cc
