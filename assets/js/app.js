@@ -23,7 +23,8 @@ function updateHourItems(){
     //add click event to timeSlots
     //document.addEventListener('click',handleSave())
     $(document).on('click','.save-btn',handleSave);
+    //enable btns
     }
     
     //start when domcontent loaded event -- cant deal with the DOM
-    $(document).ready(main);
+    $(main);
