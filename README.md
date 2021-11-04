@@ -3,13 +3,16 @@
 ## Description
 This is a simple calendar application that allow users to save events for each hour of the day. The app runs in the browser and dynamically updated HTML and CSS powered by jQuery. 
 
-## Screenshots
+## Demo
+![demo](./assets/images/work-day-schedule-demo.gif)
 
 ## Built with
 * HTML
 * CSS
-* Bootstrap
 * JavaScript
+
+## Third Party Libraries
+* Bootstrap
 * JQuery
 
 ## Website

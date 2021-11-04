@@ -27,38 +27,14 @@ function updateHourItems(){
     $(".description").each(function(){
         var timeId =$(this).parent('.time-block').attr('id');
         var description = localStorage.getItem(timeId);
+        if(description !==null ){
         $(this).text(description);
+        }
     });
 };
 var createTasks =function(){
     
 }
-var loadTasks =function(){
-    //read relevant local storage data (about relevant hour slot)    
-    tasks = JSON.parse(localStorage.getItem("tasks"));
-    if (!tasks) {
-        tasks = {
-          hour9: [],
-          hour10: [],
-          hour11: [],
-          hour12: [],
-          hour13: [],
-          hour14: [],
-          hour15: [],
-          hour16: [],
-          hour17: [],
-        };
-      }
-    // loop over object properties
-    $.each(tasks, function(list, arr) {
-    //console.log(list, arr);
-    // then loop over sub-array
-    arr.forEach(function(task) {
-    createTask(task.text, task.date, list);
-    });
-  });
-  console.log(tasks)
-};
 
 var saveTasks=function(){
     localStorage.setItem("tasks",JSON.stringify(tasks));
@@ -68,13 +44,8 @@ function handleSave(event){
     console.log(event.target);     
     //tree traversal getting sibling element 
     var value= ($(event.target).siblings('.description').val());
-    console.log(value);
-    var taskText =$(descriptionEl).text(value);
-    console.log( $(descriptionEl).text(value));
-console.log(taskText)
     //getting closest (or parent not sibling))element attribute
     var hour =($(event.target).closest('.time-block').attr('id'));
-    console.log(hour);
     localStorage.setItem(hour,value);
     $(".hour").each(function(){
         var currHour =$(this).text();
